@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace MrFixIt.Models
 {
+    //[Table("Jobs")]
+    //this could be added in order to name the table correctly
     public class Job
     {
         [Key]

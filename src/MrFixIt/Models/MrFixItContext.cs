@@ -8,7 +8,7 @@ namespace MrFixIt.Models
         public MrFixItContext()
         {
         }
-
+        //in addition to log in information- jobs and workers are setup in the database with DbSet
         public virtual DbSet<Job> Jobs { get; set; }
 
         public virtual DbSet<Worker> Workers { get; set; }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using MrFixIt.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+//appears to be a standard AccountController.cs for authentication
 
 namespace MrFixIt.Controllers
 {
@@ -33,6 +34,7 @@ namespace MrFixIt.Controllers
         //    return View();
         //}
 
+        //the ^^^ index route has been rewritten vvv to handle authentication
         public IActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
@@ -51,7 +53,7 @@ namespace MrFixIt.Controllers
         {
             return View();
         }
-
+        //this appears to use the RegisterViewModel to grab relevent information on the Account-Register page and use it to create a new user - it will then route to the account-index
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -85,7 +87,7 @@ namespace MrFixIt.Controllers
                 return View();
             }
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> LogOff()
         {

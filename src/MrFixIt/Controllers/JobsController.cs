@@ -12,6 +12,7 @@ namespace MrFixIt.Controllers
 {
     public class JobsController : Controller
     {
+        //define db for this context
         private MrFixItContext db = new MrFixItContext();
 
         // GET: /<controller>/
@@ -44,13 +45,13 @@ namespace MrFixIt.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        //route to the claim page and see the job u want to claim
         public IActionResult Claim(int id)
         {
             var thisItem = db.Jobs.FirstOrDefault(items => items.JobId == id);
             return View(thisItem);
         }
-
+        //this is the POST action for claiming a job - in readme labled IN PROGRESS - will probably need work.
         [HttpPost]
         public IActionResult Claim(Job job)
         {

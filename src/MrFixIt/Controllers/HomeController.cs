@@ -16,6 +16,7 @@ namespace MrFixIt.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+            //this seems more like an appropriate place for log in to land you- it will render a view that gives you your user information and not much else. page just tells you if you are logged in or not...
             if (User.Identity.IsAuthenticated)
             {
                 var thisWorker = db.Workers.FirstOrDefault(item => item.UserName == User.Identity.Name);

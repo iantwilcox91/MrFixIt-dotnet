@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Http;
 
 namespace MrFixIt.Models
 {
+    //[Table("Workers")]
+    //this could be added in order to name the table correctly
     public class Worker
     {
         [Key]
