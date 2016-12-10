@@ -9,13 +9,24 @@
 
 <h2>Would you like to do this job?</h2>
 <hr />
-@using (Html.BeginForm())
-{
-    @Html.HiddenFor(model => model.JobId)
-    @Html.HiddenFor(model => model.Title)
-    @Html.HiddenFor(model => model.Description)
 
-    <h4>@Model.Title</h4>
-    <input type="submit" value="Claim This Job" />
-}
-<p>@Html.ActionLink("Back to list", "Index")</p>
+<hideButton>
+    @*@using (Html.BeginForm())*@
+    @*maybe have to change JobsController to Jobs???*@
+    @using (Html.BeginForm("Claim", "Jobs", FormMethod.Post, new { @class = "claim-job" }))
+    {
+        @Html.HiddenFor(model => model.JobId)
+        @Html.HiddenFor(model => model.Title)
+        @Html.HiddenFor(model => model.Description)
+
+        <h4>@Model.Title</h4>
+        <input type="submit" value="Claim This Job" />
+    }
+</hideButton>
+
+<div id="ClaimedJob"></div>
+
+<br />
+<showButton>
+    <p>@Html.ActionLink("Back to list", "Index")</p>
+</showButton>

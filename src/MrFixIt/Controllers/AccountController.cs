@@ -87,7 +87,13 @@ namespace MrFixIt.Controllers
                 return View();
             }
         }
-        
+        //[HttpPost]
+        //public async Task<IActionResult> LogOff()
+        //{
+        //    await _signInManager.SignOutAsync();
+        //    return RedirectToAction("Index");
+        //}
+        //usually this is a Post request - further deductive work is required here
         [HttpGet]
         public async Task<IActionResult> LogOff()
         {
