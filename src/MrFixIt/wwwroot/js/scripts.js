@@ -1,19 +1,24 @@
 ﻿var test = "it works";
 
+$(function () {
 
-$(".claim-job").submit(function (event) {
-    event.preventDefault();
-    $("hideButton").hide();
+
+$(".claimjob").click(function () {
+    //alert("clicked");
+    var jobid = $(this).siblings('.ThisJobId').val();
+    //alert(jobid)
+    var username = $('.ThisUserName-' + jobid).val();
+    //alert(username)
+    $(".HideAfterClick-"+jobid).hide();
+
     $.ajax({
         url: "/Jobs/Claim",
-        //url: '@Url.Action("Claim")',
-        type: 'POST',
+        data: { jobId: jobid, userName: username },
+        type: 'GET',
         success: function (result) {
-            $('#ClaimedJob').html(result);
-        } //this should show "You've claimed this job" on the page but has errors
+            $('.ClaimedJob-' + jobid).html(result);
+        }
     });
 });
 
-$('.AddButton').click(function () {
-    $("hideButton").show();
 });

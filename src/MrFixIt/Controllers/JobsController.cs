@@ -46,16 +46,18 @@ namespace MrFixIt.Controllers
             return RedirectToAction("Index");
         }
         //route to the claim page and see the job u want to claim
-        public IActionResult Claim(int id)
-        {
-            var thisItem = db.Jobs.FirstOrDefault(items => items.JobId == id);
-            return View(thisItem);
-        }
+        //public IActionResult Claim(int id)
+        //{
+        //    var thisItem = db.Jobs.FirstOrDefault(items => items.JobId == id);
+        //    return View(thisItem);
+        //}
         //this is the POST action for claiming a job - in readme labled IN PROGRESS - will probably need work.
-        [HttpPost]
-        public IActionResult Claim(Job job)
+        //[HttpPost]
+        public IActionResult Claim(int jobId, string userName)
         {
-            job.Worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
+            var job = db.Jobs.FirstOrDefault(items => items.JobId == jobId);
+            job.Worker = db.Workers.FirstOrDefault(i => i.UserName == userName);
+
             db.Entry(job).State = EntityState.Modified;
             db.SaveChanges();
 
