@@ -41,5 +41,23 @@ namespace MrFixIt.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult MarkAsActive()
+        {
+            //stuff goes here
+            return Content("You've marked this job as active", "text/plain");
+        }
+
+        public IActionResult MarkAsCompleated(int jobid)
+        {
+            var job = db.Jobs.FirstOrDefault(j => j.JobId == jobid);
+            job.Completed = true;
+            db.Entry(job).State = EntityState.Modified;
+            db.SaveChanges();
+            return Content(" ", "text/plain");
+        }
+
+
+
     }
 }
