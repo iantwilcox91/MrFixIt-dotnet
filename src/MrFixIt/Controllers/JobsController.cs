@@ -51,7 +51,7 @@ namespace MrFixIt.Controllers
         //    var thisItem = db.Jobs.FirstOrDefault(items => items.JobId == id);
         //    return View(thisItem);
         //}
-        //this is the POST action for claiming a job - in readme labled IN PROGRESS - will probably need work.
+
         //[HttpPost]
         public IActionResult Claim(int jobId, string userName)
         {

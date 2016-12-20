@@ -1,9 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
+﻿@*this page is /workers/index*@
 
 @if (User.Identity.IsAuthenticated)
 {
@@ -11,17 +6,48 @@
     <div class="text-center">
         <h4>Hello Worker @Model.FirstName @Model.LastName. You are Logged In</h4>
         <h3>Your Current Jobs:</h3>
+        <h5 class="ThisIsYourActiveJob">
+            @foreach (var Job in Model.Jobs)
+            {
+                @if (Job.Completed == false)
+                {
+                    @if (Job.Active == true)
+                    {
+                        <div class="CompleatedHide-@Job.JobId">
+                            @Job.Title | This job is <span class="status">active</span><br />
+                            <input type="hidden" value="@Job.Title" class="Title-@Job.JobId" />
+                            <input type="hidden" value="@Job.JobId" class="ThisJobId" />
+                            <input type="hidden" value="@User.Identity.Name" class="ThisUserName-@Job.JobId" />
+                            <button class="markCompleated">Mark as Compleated</button>
+                        </div>
+                        <hr />
+                    }
+                    else
+                    {
+                        <div class="ActiveHide-@Job.JobId">
+                            @Job.Title | This job is <span class="status">inactive</span><br />
+                            <input type="hidden" value="@Job.Title" class="Title-@Job.JobId" />
+                            <input type="hidden" value="@Job.JobId" class="ThisJobId" />
+                            <input type="hidden" value="@User.Identity.Name" class="ThisUserName-@Job.JobId" />
+                            <button class="markActive">Mark as Active</button>
+                            <hr />
+                        </div>
+                    }
+                }
+            }
+        </h5>
+        <h3>Your Compleated Jobs:</h3>
+        <div class="CompletedJobs"></div>
         @foreach (var Job in Model.Jobs)
         {
-            <h5>
-                @Job.Title | This job is @if (Job.Active == true)
-                { <span class="status">active</span> }
-                else
-                {
-                    <span class="status">inactive</span> }
-            </h5>
-
+            @if (Job.Completed == true)
+            {
+                <h5> @Job.Title</h5>
+            }
         }
+
+
+
         @if (Model.Avaliable)
         {
             <h2>Please @Html.ActionLink("select a job", "Index", "Jobs").</h2>
@@ -32,3 +58,4 @@
         }
     </div>
 }
+<div class="hiddenDiv"></div>
