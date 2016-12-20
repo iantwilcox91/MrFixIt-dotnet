@@ -6,12 +6,11 @@
     <div class="text-center">
         <h4>Hello Worker @Model.FirstName @Model.LastName. You are Logged In</h4>
         <h3>Your Current Jobs:</h3>
-
-        @foreach (var Job in Model.Jobs)
-        {
-            @if (Job.Completed == false)
+        <h5 class="ThisIsYourActiveJob">
+            @foreach (var Job in Model.Jobs)
             {
-                <h5>
+                @if (Job.Completed == false)
+                {
                     @if (Job.Active == true)
                     {
                         <div class="CompleatedHide-@Job.JobId">
@@ -27,16 +26,16 @@
                     {
                         <div class="ActiveHide-@Job.JobId">
                             @Job.Title | This job is <span class="status">inactive</span><br />
+                            <input type="hidden" value="@Job.Title" class="Title-@Job.JobId" />
                             <input type="hidden" value="@Job.JobId" class="ThisJobId" />
                             <input type="hidden" value="@User.Identity.Name" class="ThisUserName-@Job.JobId" />
                             <button class="markActive">Mark as Active</button>
                             <hr />
                         </div>
-                   }
-                </h5>
+                    }
+                }
             }
-        }
-
+        </h5>
         <h3>Your Compleated Jobs:</h3>
         <div class="CompletedJobs"></div>
         @foreach (var Job in Model.Jobs)

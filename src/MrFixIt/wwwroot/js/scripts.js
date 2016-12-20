@@ -24,10 +24,17 @@ $(function () {
     //mark active
     $(".markActive").click(function () {
         var jobid = $(this).siblings('.ThisJobId').val();
-        var username = $('.ThisUserName-' + jobid).val();
+        var title = $('.Title-' + jobid).val();
         $(".ActiveHide-" + jobid).hide();
-
         //alert("clicked " + jobid + " mark as Active");
+        $.ajax({
+            type: 'GET',
+            data: { jobid: jobid, title: title },
+            url: '/Workers/MarkAsActive',
+            success: function (result) {
+                $('.ThisIsYourActiveJob').html(result);
+            }
+        });
     });
 
 

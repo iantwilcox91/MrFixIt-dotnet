@@ -42,10 +42,22 @@ namespace MrFixIt.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult MarkAsActive()
+        public IActionResult MarkAsActive(int jobid, string title)
         {
-            //stuff goes here
-            return Content("You've marked this job as active", "text/plain");
+            var worker = db.Workers.Include(i => i.Jobs).FirstOrDefault(i => i.UserName == User.Identity.Name);
+            foreach (var job in worker.Jobs)
+            {
+                if (job.JobId == jobid)
+                {
+                    job.Active = true;
+                }
+                else
+                {
+                    job.Active = false;
+                }
+            }
+            db.SaveChanges();
+            return Content("Your active job has been updated to: "+ title, "text/plain");
         }
 
         public IActionResult MarkAsCompleated(int jobid)
